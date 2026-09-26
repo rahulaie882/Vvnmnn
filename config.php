@@ -167,6 +167,13 @@ function isLicenseValid() {
     return strtotime($expiry) >= strtotime(date('Y-m-d'));
 }
 
+function licenseDaysLeft() {
+    $expiry = getSetting('license_expiry');
+    if (!$expiry || trim($expiry) === '') return 9999;
+    $days = (strtotime($expiry) - strtotime(date('Y-m-d'))) / 86400;
+    return max(0, (int)$days);
+}
+
 // Bot style emojis — panel se choose hoga
 function getBtnStyle() {
     $styles = [
